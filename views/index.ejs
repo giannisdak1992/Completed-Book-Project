@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  </head>
+
+  <body>
+      <div id="centerDiv">
+        <h1 class="title">My Book blog</h1>
+        <div id="register-login-logout"> 
+          <a class="btn btn-light btn-lg" href="/register" role="button">Register</a>
+          <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+        </div>
+        
+      </div>
+
+        <div class="container">
+          <% if (locals.books) {%> 
+          <% books.forEach(book => { %>
+          <div class="row">
+          
+          
+          <div class="card-body col-sm-1 col-md-3 col-lg-3 col-xl-4">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal"><%=book.title %></h4>
+            </div>
+            <h1 class="card-title pricing-card-title">
+              <small class="text-body-secondary fw-light"
+                ><%=book.author %></small
+              >
+            </h1>
+            <img src="//covers.openlibrary.org/b/olid/OL<%= book.cover_id %>M-M.jpg" class="img"
+                            srcset="//covers.openlibrary.org/b/olid/OL<%= book.cover_id %>M-M.jpg 2x" alt="Book cover">
+
+                          
+             <div id="rating<%=book.book_id %>">
+                <% for (let i = 0; i < 5; i++) { %>
+                    <span class="fa fa-star <%= i < book.rating ? 'checked' : '' %>"></span>
+                <% } %>
+            </div>
+       </div>
+          </div>
+          
+          <% }); %>
+        </div>
+        <% } %>
+        </div>
+
+    
+
+    <script>
+      function handler(book_id) {
+        document.getElementById('edit' + book_id).setAttribute('hidden', true)
+        document.getElementById('delete' + book_id).setAttribute('hidden', true)
+        document.getElementById('done' + book_id).removeAttribute('hidden')
+        document.getElementById('input' + book_id).removeAttribute('hidden')
+        document.getElementById('rating' + book_id).setAttribute('hidden', true)
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
